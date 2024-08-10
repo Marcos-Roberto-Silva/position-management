@@ -1,4 +1,4 @@
-package br.com.marcosilva.gestao_de_vagas.modules.candidate.useCases;
+package br.com.marcosilva.gestao_de_vagas.modules.candidate.usecases;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

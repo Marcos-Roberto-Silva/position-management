@@ -7,9 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.marcosilva.gestao_de_vagas.exceptions.exceptionHandlerController;
 import br.com.marcosilva.gestao_de_vagas.modules.candidate.candidateEntity;
-import br.com.marcosilva.gestao_de_vagas.modules.candidate.useCases.createCandidateUsecase;
+import br.com.marcosilva.gestao_de_vagas.modules.candidate.usecases.createCandidateUsecase;
 import jakarta.validation.Valid;
 
 @RestController
