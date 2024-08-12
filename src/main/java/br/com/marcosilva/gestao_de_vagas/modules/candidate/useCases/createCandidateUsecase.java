@@ -1,6 +1,7 @@
 package br.com.marcosilva.gestao_de_vagas.modules.candidate.usecases;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.marcosilva.gestao_de_vagas.exceptions.userfoundException;
@@ -19,6 +20,7 @@ public class createCandidateUsecase {
             .ifPresent((user) -> {
                 throw new userfoundException();
             });
+
         return this.candidateRep.save(candidate);
     }
 }
