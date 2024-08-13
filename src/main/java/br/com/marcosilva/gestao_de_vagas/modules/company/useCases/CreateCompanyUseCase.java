@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.marcosilva.gestao_de_vagas.exceptions.userfoundException;
+import br.com.marcosilva.gestao_de_vagas.exceptions.UserFoundException;
 import br.com.marcosilva.gestao_de_vagas.modules.company.entities.CompanyEntity;
 import br.com.marcosilva.gestao_de_vagas.modules.company.repositories.CompanyRepository;
 
@@ -21,7 +21,7 @@ public class CreateCompanyUseCase {
         this.companyRepository
             .findByUsernameOrEmail(companyEntity.getUsername(), companyEntity.getEmail())
             .ifPresent((user) -> {
-                throw new userfoundException();
+                throw new UserFoundException();
             });
 
             var encryptedPassword = passwordEncoder.encode(companyEntity.getPassword());
