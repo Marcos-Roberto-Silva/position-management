@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class errorMessageDTO {
+public class ErrorMessageDTO {
     private String message;
     private String field;
 }

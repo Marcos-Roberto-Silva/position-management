@@ -4,23 +4,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.marcosilva.gestao_de_vagas.exceptions.userfoundException;
-import br.com.marcosilva.gestao_de_vagas.modules.candidate.candidateEntity;
-import br.com.marcosilva.gestao_de_vagas.modules.candidate.candidateRepository;
+import br.com.marcosilva.gestao_de_vagas.exceptions.UserFoundException;
+import br.com.marcosilva.gestao_de_vagas.modules.candidate.CandidateEntity;
+import br.com.marcosilva.gestao_de_vagas.modules.candidate.repositories.CandidateRepository;
 
 @Service
-public class createCandidateUsecase {
+public class CreateCandidateUseCase {
 
     @Autowired
-    private candidateRepository candidateRep;
+    private CandidateRepository candidateRep;
 
-    public candidateEntity execute(candidateEntity candidate) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public CandidateEntity execute(CandidateEntity candidateEntity) {
+
+
         this.candidateRep.
-            findByUsernameOrEmail(candidate.getUsername(), candidate.getEmail())
+            findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
             .ifPresent((user) -> {
-                throw new userfoundException();
+                throw new UserFoundException();
             });
 
-        return this.candidateRep.save(candidate);
+        var encryptedPassword = passwordEncoder.encode(candidateEntity.getPassword());
+        candidateEntity.setPassword(encryptedPassword);
+
+        return this.candidateRep.save(candidateEntity);
     }
 }
