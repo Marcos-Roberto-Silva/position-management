@@ -1,4 +1,4 @@
-package br.com.marcosilva.gestao_de_vagas.modules.company.dto;
+package br.com.marcosilva.gestao_de_vagas.modules.candidate.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthCandidateResponseDTO {
     private String access_token;
+    private Long expires_in;
 }
