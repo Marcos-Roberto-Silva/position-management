@@ -2,7 +2,9 @@ package br.com.marcosilva.gestao_de_vagas.modules.company.useCases;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 
+import br.com.marcosilva.gestao_de_vagas.modules.company.dto.AuthCompanyResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,7 +29,7 @@ public class AuthCompanyUseCase {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String execute(AuthCompanyDTO authCompanyDTO) throws Exception {
+    public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws Exception {
         
         var company =  this.companyRepository.findByUsername(authCompanyDTO.getUsername())
         .orElseThrow(
@@ -36,18 +38,28 @@ public class AuthCompanyUseCase {
             }
         );
 
-        var passworMatches = this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
+        var passwordMatches = this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
 
-        if (!passworMatches) {
+        if (!passwordMatches) {
             throw new Exception();
         }   
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
-            var token = JWT.create().withIssuer("javagas")
-            .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
-            .withSubject(company.getId().toString())
-            .sign(algorithm);
 
-        return token;
+        var expiresIn = Instant.now().plus(Duration.ofHours(2));
+
+        var token = JWT.create().withIssuer("javagas")
+        .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+        .withSubject(company.getId().toString())
+        .withExpiresAt(expiresIn)
+        .withClaim("roles", Arrays.asList("COMPANY"))
+        .sign(algorithm);
+
+        var authCompanyResponseDTO = AuthCompanyResponseDTO.builder()
+                .access_token(token)
+                .expires_in(expiresIn.toEpochMilli())
+                .build();
+
+        return authCompanyResponseDTO;
     }
 }
