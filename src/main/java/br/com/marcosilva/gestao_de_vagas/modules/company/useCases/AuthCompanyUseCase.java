@@ -1,4 +1,4 @@
-package br.com.marcosilva.gestao_de_vagas.modules.candidate.usecases;
+package br.com.marcosilva.gestao_de_vagas.modules.company.useCases;
 
 import java.time.Duration;
 import java.time.Instant;

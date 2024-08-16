@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GestaoDeVagasApplication {
+public class ManagementJobPositionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GestaoDeVagasApplication.class, args);
+		SpringApplication.run(ManagementJobPositionApplication.class, args);
 	}
 }
