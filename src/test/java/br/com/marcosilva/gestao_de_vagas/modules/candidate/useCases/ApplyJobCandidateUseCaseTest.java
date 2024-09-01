@@ -32,12 +32,27 @@ public class ApplyJobCandidateUseCaseTest {
     private JobRepository jobRepository;
 
     @Test
-    @DisplayName("should not be able to apply job candidate not found ")
+    @DisplayName("should not be able to apply a job when candidate not found ")
     public void should_not_be_able_to_apply_job_candidate_not_found() {
         try {
             applyJobCandidateUseCase.execute(null, null);
         } catch (Exception e) {
             assertThat(e).isInstanceOf(UserNotFoundException.class);
+        }
+    }
+
+    @Test
+    public void should_not_be_able_to_apply_to_job_not_found() {
+        var candidateId = UUID.randomUUID();
+
+        var candidate = new CandidateEntity();
+        candidate.setId(candidateId);
+        when(candidateRepository.findById(candidateId)).thenReturn(Optional.of(candidate));
+
+        try {
+            applyJobCandidateUseCase.execute(candidateId, null);
+        } catch (Exception e) {
+            assertThat(e).isInstanceOf(JobNotFoundException.class);
         }
     }
 }
