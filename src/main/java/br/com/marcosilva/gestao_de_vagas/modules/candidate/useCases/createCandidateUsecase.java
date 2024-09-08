@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.marcosilva.gestao_de_vagas.exceptions.UserFoundException;
-import br.com.marcosilva.gestao_de_vagas.modules.candidate.CandidateEntity;
+import br.com.marcosilva.gestao_de_vagas.modules.candidate.entity.CandidateEntity;
 import br.com.marcosilva.gestao_de_vagas.modules.candidate.repositories.CandidateRepository;
 
 @Service
