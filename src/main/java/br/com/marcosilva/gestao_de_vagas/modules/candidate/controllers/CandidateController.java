@@ -12,15 +12,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.servlet.http.HttpServletRequest;
-import org.hibernate.annotations.Array;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
-import br.com.marcosilva.gestao_de_vagas.modules.candidate.CandidateEntity;
+import br.com.marcosilva.gestao_de_vagas.modules.candidate.entity.CandidateEntity;
 import jakarta.validation.Valid;
 
 import java.util.List;
